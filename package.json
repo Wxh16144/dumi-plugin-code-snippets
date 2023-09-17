@@ -63,6 +63,9 @@
       "prettier --parser=typescript --write"
     ]
   },
+  "dependencies": {
+    "fs-extra": "^11.1.1"
+  },
   "devDependencies": {
     "@commitlint/cli": "^17",
     "@commitlint/config-conventional": "^17",
@@ -80,7 +83,6 @@
     "eslint": "^8",
     "fast-glob": "^3.3.1",
     "father": "^4",
-    "fs-extra": "^11.1.1",
     "husky": "^8",
     "lint-staged": "^13",
     "prettier": "^2",
@@ -91,6 +93,7 @@
     "remark": "^14.0.3",
     "semantic-release": "^21",
     "stylelint": "^15",
+    "typescript": "~5.0.4",
     "vfile": "^6.0.1",
     "vitest": "latest"
   },
