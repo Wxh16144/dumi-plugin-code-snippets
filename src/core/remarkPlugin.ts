@@ -10,13 +10,17 @@ type IDumiUserConfig = ReturnType<typeof defineConfig>;
 
 export interface IProps {
   codeBlockMode?: Required<IDumiUserConfig>['resolve']['codeBlockMode'];
+  cwd?: string;
 }
 
 function remarkPlugin(opt: IProps) {
-  const { codeBlockMode = 'active' } = opt;
+  const { codeBlockMode = 'active', cwd = process.cwd() } = opt;
 
   return (tree: any, vFile: any) => {
     const codeSnippets: [Node, number, Parent | undefined][] = [];
+    // @ts-ignore
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const _self: any = this;
 
     unistUtilVisit.visit(tree, 'paragraph', (node, index, parent) => {
       if (!Array.isArray(node.children) && node.children.length > 1) {
@@ -49,11 +53,19 @@ function remarkPlugin(opt: IProps) {
       const rawPath = cloneNode.children[0].value.slice(3).trim();
       // todo: alias
       // .replace(/^@/, srcDir)
+
       const { filepath, extension, region, lines } = rawPathToToken(rawPath);
       const regionName = region.slice(1);
 
-      // fixme: resourcePath is undefined，需要 dumi 那边给出解决方案
-      const currentFileAbsPath = path.resolve(vFile.data.frontmatter!.resourcePath ?? '');
+      // ref: https://github.com/umijs/dumi/pull/1901
+      const currentFileAbsPath = (function () {
+        if (_self.data?.('fileAbsPath')) return _self.data('fileAbsPath');
+
+        const __fm_path = vFile?.data?.frontmatter?.filename;
+
+        return path.join(cwd, __fm_path || '');
+      })();
+
       const src = path.isAbsolute(filepath)
         ? filepath
         : path.join(path.dirname(currentFileAbsPath), filepath);
@@ -64,7 +76,9 @@ function remarkPlugin(opt: IProps) {
       const isAFile = srcStats && (srcStats.isFile() || srcStats.isSymbolicLink());
 
       if (!isAFile) {
-        content = isAFile ? `Invalid code snippet option` : `Code snippet path not found: ${src}`;
+        content = isAFile
+          ? `Invalid code snippet option`
+          : `Code snippet path not found: ${path.relative(path.dirname(currentFileAbsPath), src)}`;
       } else {
         content = fs.readFileSync(src, 'utf8');
       }

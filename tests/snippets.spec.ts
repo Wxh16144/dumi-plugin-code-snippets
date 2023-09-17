@@ -1,4 +1,3 @@
-import path from 'path';
 import { remark } from 'remark';
 import { VFile } from 'vfile';
 
@@ -10,9 +9,11 @@ describe('snippet', () => {
       value: content.trim(),
       data: {
         frontmatter: {
-          resourcePath: path.resolve(__dirname, './__fixtures__/index.md'),
+          filename: './tests/__fixtures__/index.md',
         },
       },
+      basename: 'index.md',
+      extname: '.md',
     }) as unknown as string;
 
   it('基础功能', () => {
