@@ -120,3 +120,16 @@ export default My;
 \`\`\`
 "
 `;
+
+exports[`snippet > 没有正确导入时返回原始内容 1`] = `
+"## test
+
+\`\`\`ts
+console.log('Hello dumi-plugin-code-snippets!');
+\`\`\`
+
+> > ./say-hi.ts
+
+<code>test</code>
+"
+`;

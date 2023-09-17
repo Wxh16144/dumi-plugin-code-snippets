@@ -1,3 +1,5 @@
+import os from 'os';
+import path from 'path';
 import { remark } from 'remark';
 import { VFile } from 'vfile';
 
@@ -81,5 +83,49 @@ describe('snippet', () => {
       \`\`\`
       "
     `);
+  });
+
+  it('没有正确导入时返回原始内容', () => {
+    expect(
+      remark()
+        .use(core, {})
+        .processSync(
+          generateFile(`
+## test
+
+\`\`\`ts
+console.log('Hello dumi-plugin-code-snippets!');
+\`\`\`
+
+>> ./say-hi.ts
+
+<code>test</code>
+    `),
+        )
+        .toString(),
+    ).toMatchSnapshot();
+  });
+
+  it('绝对路径', () => {
+    expect(
+      remark()
+        .use(core, {})
+        .processSync(
+          generateFile(`
+    <<< /aa/bb/style.css
+    `),
+        )
+        .toString(),
+      /* prettier-ignore */
+      // eslint-disable-next-line jest/no-interpolation-in-snapshots
+    ).toMatchInlineSnapshot(`
+        "\`\`\`css | pure
+        Code snippet path not found: ${path.relative(
+          path.join(process.cwd(), './src/core/a/b'),
+          os.homedir(),
+        )}/aa/bb/style.css
+        \`\`\`
+        "
+      `);
   });
 });
