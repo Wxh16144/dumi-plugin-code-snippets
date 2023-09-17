@@ -36,6 +36,7 @@
     "build:watch": "father dev",
     "ci": "npm run lint && npm run type-check && npm run doctor && npm run build",
     "clean": "rm -rf es lib dist coverage playground/.dumi/tmp* .eslintcache .doc",
+    "debug": "rm -rf playground/.dumi/tmp* playground/node_modules/.cache && npm run dev",
     "dev": "pnpm run --filter playground dev",
     "docs:build": "pnpm run --filter playground build",
     "doctor": "father doctor",
