@@ -98,22 +98,10 @@ function remarkPlugin(opt: IProps) {
       }
 
       // ref: https://github.com/umijs/dumi/blob/e0a864462c4a3f778c5a677150a02ab451e4b99f/src/loaders/markdown/transformer/rehypeDemo.ts#L53-L59
-      let codeBlockModeStr: string = '';
-      switch (codeBlockMode) {
-        case 'active':
-          codeBlockModeStr += '| pure';
-          break;
-        case 'passive':
-        default:
-          codeBlockModeStr = '';
-          break;
-      }
+      const codeBlockModeStr = codeBlockMode === 'active' ? '| pure' : '';
 
       // ref: https://github.com/umijs/dumi/blob/e0a864462c4a3f778c5a677150a02ab451e4b99f/src/loaders/markdown/transformer/rehypeHighlightLine.ts#L31
-      let linesStr: string = '';
-      if (lines) {
-        linesStr = `{${lines}}`;
-      }
+      const linesStr = lines ? `{${lines}}` : '';
 
       // replace node
       parent?.children.splice(index!, 1, {
