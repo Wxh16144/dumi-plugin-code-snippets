@@ -12,6 +12,37 @@ export function doSomething() {
 "
 `;
 
+exports[`snippet > 支持 c# 文件 1`] = `
+"\`\`\`cs | pure
+using System;
+
+namespace HelloWorld
+{
+  class Program
+  {
+    // #region main
+    static void Main(string[] args)
+    {
+      Console.WriteLine(\\"Hello dumi-plugin-code-snippets!\\");
+    }
+    // #endregion main
+  }
+}
+
+\`\`\`
+"
+`;
+
+exports[`snippet > 支持 c# 文件 region 1`] = `
+"\`\`\`cs | pure
+static void Main(string[] args)
+{
+  Console.WriteLine(\\"Hello dumi-plugin-code-snippets!\\");
+}
+\`\`\`
+"
+`;
+
 exports[`snippet > 支持 css 文件 1`] = `
 "\`\`\`css | pure
 #App {

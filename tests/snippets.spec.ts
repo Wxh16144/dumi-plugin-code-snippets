@@ -61,9 +61,25 @@ describe('snippet', () => {
     ).toMatchSnapshot();
   });
 
-  it.skip('路径错误返回错误信息', () => {
+  it('支持 c# 文件', () => {
     expect(
-      remark().use(core, {}).processSync(generateFile(`<<< ./aa/bb/style.css`)).toString(),
+      remark().use(core, {}).processSync(generateFile(`<<< ./say-hi.cs`)).toString(),
     ).toMatchSnapshot();
+  });
+
+  it('支持 c# 文件 region', () => {
+    expect(
+      remark().use(core, {}).processSync(generateFile(`<<< ./say-hi.cs#main`)).toString(),
+    ).toMatchSnapshot();
+  });
+
+  it('路径错误返回错误信息', () => {
+    expect(remark().use(core, {}).processSync(generateFile(`<<< ./aa/bb/style.css`)).toString())
+      .toMatchInlineSnapshot(`
+      "\`\`\`css | pure
+      Code snippet path not found: aa/bb/style.css
+      \`\`\`
+      "
+    `);
   });
 });
