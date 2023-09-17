@@ -1,7 +1,7 @@
 {
   "name": "dumi-plugin-code-snippets",
   "version": "0.0.1-alpha.0",
-  "description": "Dumi Plugin - Beautify inline color blocks",
+  "description": "Dumi Plugin - Import code snippets from existing files",
   "keywords": [
     "dumi"
   ],
@@ -21,11 +21,6 @@
       "types": "./es/index.d.ts",
       "import": "./es/index.js",
       "require": "./lib/index.js"
-    },
-    "./component": {
-      "types": "./es/components/index.d.ts",
-      "import": "./es/components/index.js",
-      "require": "./lib/components/index.js"
     }
   },
   "main": "lib/index.js",
@@ -41,6 +36,7 @@
     "build:watch": "father dev",
     "ci": "npm run lint && npm run type-check && npm run doctor && npm run build",
     "clean": "rm -rf es lib dist coverage playground/.dumi/tmp* .eslintcache .doc",
+    "debug": "rm -rf playground/.dumi/tmp* playground/node_modules/.cache && npm run dev",
     "dev": "pnpm run --filter playground dev",
     "docs:build": "pnpm run --filter playground build",
     "doctor": "father doctor",
@@ -68,15 +64,17 @@
     ]
   },
   "dependencies": {
-    "@ctrl/tinycolor": "^4"
+    "fs-extra": "^11.1.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^17",
     "@commitlint/config-conventional": "^17",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
+    "@types/fs-extra": "^11.0.2",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/unist": "^3.0.0",
     "@umijs/lint": "^4",
     "@vitest/coverage-v8": "latest",
     "commitlint": "^17",
@@ -92,9 +90,11 @@
     "prettier-plugin-packagejson": "^2",
     "react": "^18",
     "react-dom": "^18",
+    "remark": "^14.0.3",
     "semantic-release": "^21",
     "stylelint": "^15",
-    "typescript": "^5",
+    "typescript": "~5.0.4",
+    "vfile": "^6.0.1",
     "vitest": "latest"
   },
   "peerDependencies": {

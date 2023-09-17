@@ -1,0 +1,135 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`snippet > 带高亮行 1`] = `
+"\`\`\`ts {1}| pure
+console.log('Hello dumi-plugin-code-snippets!');
+
+export function doSomething() {
+  return 1;
+}
+
+\`\`\`
+"
+`;
+
+exports[`snippet > 支持 c# 文件 1`] = `
+"\`\`\`cs | pure
+using System;
+
+namespace HelloWorld
+{
+  class Program
+  {
+    // #region main
+    static void Main(string[] args)
+    {
+      Console.WriteLine(\\"Hello dumi-plugin-code-snippets!\\");
+    }
+    // #endregion main
+  }
+}
+
+\`\`\`
+"
+`;
+
+exports[`snippet > 支持 c# 文件 region 1`] = `
+"\`\`\`cs | pure
+static void Main(string[] args)
+{
+  Console.WriteLine(\\"Hello dumi-plugin-code-snippets!\\");
+}
+\`\`\`
+"
+`;
+
+exports[`snippet > 支持 css 文件 1`] = `
+"\`\`\`css | pure
+#App {
+  color: red;
+}
+
+\`\`\`
+"
+`;
+
+exports[`snippet > 支持 region + 高亮行 1`] = `
+"\`\`\`tsx {4}| pure
+function My(props: React.PropsWithChildren<MyProps>) {
+  const { children } = props;
+  return (
+    <>
+      <div className=\\"my-slogan\\">
+        <p>魔法师正在进行最后的仪式，为您带来一项惊艳功能</p>
+        <strong>TBD: The Brilliant Discovery!</strong>
+      </div>
+      {children}
+      {/* This is my.tsx} */}
+    </>
+  );
+}
+\`\`\`
+"
+`;
+
+exports[`snippet > 支持 vscode region 1`] = `
+"\`\`\`tsx | pure
+function My(props: React.PropsWithChildren<MyProps>) {
+  const { children } = props;
+  return (
+    <>
+      <div className=\\"my-slogan\\">
+        <p>魔法师正在进行最后的仪式，为您带来一项惊艳功能</p>
+        <strong>TBD: The Brilliant Discovery!</strong>
+      </div>
+      {children}
+      {/* This is my.tsx} */}
+    </>
+  );
+}
+\`\`\`
+"
+`;
+
+exports[`snippet > 支持tsx 1`] = `
+"\`\`\`tsx | pure
+import * as React from 'react';
+
+export interface MyProps {
+  slogan?: React.ReactNode;
+}
+
+// #region snippet
+function My(props: React.PropsWithChildren<MyProps>) {
+  const { children } = props;
+  return (
+    <>
+      <div className=\\"my-slogan\\">
+        <p>魔法师正在进行最后的仪式，为您带来一项惊艳功能</p>
+        <strong>TBD: The Brilliant Discovery!</strong>
+      </div>
+      {children}
+      {/* This is my.tsx} */}
+    </>
+  );
+}
+// #endregion snippet
+
+export default My;
+
+\`\`\`
+"
+`;
+
+exports[`snippet > 没有正确导入时返回原始内容 1`] = `
+"## test
+
+\`\`\`ts
+console.log('Hello dumi-plugin-code-snippets!');
+\`\`\`
+
+> > ./say-hi.ts
+
+<code>test</code>
+"
+`;
