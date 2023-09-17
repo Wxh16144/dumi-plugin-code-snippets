@@ -11,7 +11,7 @@ const githubRepoName = 'dumi-plugin-code-snippets';
 export default defineConfig({
   plugins: [githubRepoName],
   themeConfig: {
-    name: 'color-chunk',
+    name: 'code-snippets',
     socialLinks: {
       github: homepage,
     },
