@@ -21,11 +21,6 @@
       "types": "./es/index.d.ts",
       "import": "./es/index.js",
       "require": "./lib/index.js"
-    },
-    "./component": {
-      "types": "./es/components/index.d.ts",
-      "import": "./es/components/index.js",
-      "require": "./lib/components/index.js"
     }
   },
   "main": "lib/index.js",
@@ -94,7 +89,6 @@
     "react-dom": "^18",
     "semantic-release": "^21",
     "stylelint": "^15",
-    "typescript": "^5",
     "vitest": "latest"
   },
   "peerDependencies": {
