@@ -88,8 +88,10 @@
     "prettier-plugin-packagejson": "^2",
     "react": "^18",
     "react-dom": "^18",
+    "remark": "^14.0.3",
     "semantic-release": "^21",
     "stylelint": "^15",
+    "vfile": "^6.0.1",
     "vitest": "latest"
   },
   "peerDependencies": {

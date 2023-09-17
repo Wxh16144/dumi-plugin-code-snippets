@@ -98,7 +98,7 @@ function remarkPlugin(opt: IProps) {
       // ref: https://github.com/umijs/dumi/blob/e0a864462c4a3f778c5a677150a02ab451e4b99f/src/loaders/markdown/transformer/rehypeHighlightLine.ts#L31
       let linesStr: string = '';
       if (lines) {
-        linesStr = `{${lines}}}`;
+        linesStr = `{${lines}}`;
       }
 
       // replace node
