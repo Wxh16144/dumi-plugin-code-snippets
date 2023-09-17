@@ -9,7 +9,7 @@ export default (api: IApi) => {
     key: 'modifyConfig',
     stage: Infinity,
     fn: (memo: IApi['config']) => {
-      memo.alias['dumi-plugin-color-chunk/component'] = COMPONENT_PATH;
+      memo.alias['dumi-plugin-code-snippets/component'] = COMPONENT_PATH;
 
       const cloneExtraRemarkPlugins = memo.extraRemarkPlugins,
         cloneExtraRehypePlugins = memo.extraRehypePlugins;

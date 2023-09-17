@@ -1,13 +1,13 @@
-# dumi-plugin-color-chunk
+# dumi-plugin-code-snippets
 
-> 美化内联代码块儿 `#f00` 包裹的颜色值。 [Like Supported color models](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#supported-color-models)
+> 从现有代码中导入片段
 
 ## Usage
 
 ### Install
 
 ```bash
-npm install dumi-plugin-color-chunk --save-dev
+npm install dumi-plugin-code-snippets --save-dev
 ```
 
 ### Apply
@@ -15,10 +15,18 @@ npm install dumi-plugin-color-chunk --save-dev
 ```ts
 // .dumirc.ts
 export default {
-  plugins: ['dumi-plugin-color-chunk'],
+  plugins: [
+    ['dumi-plugin-code-snippets', {/* options */}]
+  ],
 };
+```
+
+### Exampled
+
+```markdown
+<<< your/file/path
 ```
 
 ### Full Document
 
-Read more: https://wxh16144.github.io/dumi-plugin-color-chunk/
+Read more: https://wxh16144.github.io/dumi-plugin-code-snippets/

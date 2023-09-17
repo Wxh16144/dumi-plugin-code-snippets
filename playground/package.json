@@ -9,6 +9,6 @@
   },
   "devDependencies": {
     "dumi": "^2",
-    "dumi-plugin-color-chunk": "workspace:*"
+    "dumi-plugin-code-snippets": "workspace:*"
   }
 }
