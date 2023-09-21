@@ -1,8 +1,9 @@
 import { defineConfig, unistUtilVisit } from 'dumi';
+import enhancedResolve from 'enhanced-resolve';
 import fs from 'fs-extra';
 import path from 'path';
 import type { Node, Parent } from 'unist';
-import { dedent, findRegion, rawPathToToken, resolvePath } from './utils';
+import { dedent, findRegion, rawPathToToken } from './utils';
 
 const CH = '<'.charCodeAt(0);
 
@@ -53,11 +54,6 @@ function remarkPlugin(opt: IProps) {
       const cloneNode: any = { ...node };
       let rawPath = cloneNode.children[0].value.slice(3).trim();
 
-      // resolve alias
-      if (Object.values(alias).length > 0) {
-        rawPath = resolvePath(alias, rawPath);
-      }
-
       const { filepath, extension, region, lines } = rawPathToToken(rawPath);
       const regionName = region.slice(1);
 
@@ -70,9 +66,10 @@ function remarkPlugin(opt: IProps) {
         return path.join(cwd, __fm_path || '');
       })();
 
-      const src = path.isAbsolute(filepath)
-        ? filepath
-        : path.join(path.dirname(currentFileAbsPath), filepath);
+      const src = enhancedResolve.create.sync({
+        alias,
+        extensions: [extension].filter(Boolean) as string[],
+      })(path.dirname(currentFileAbsPath), filepath) as string;
 
       let content: string = '';
 
