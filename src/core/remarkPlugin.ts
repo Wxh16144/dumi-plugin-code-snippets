@@ -2,7 +2,7 @@ import { defineConfig, unistUtilVisit } from 'dumi';
 import fs from 'fs-extra';
 import path from 'path';
 import type { Node, Parent } from 'unist';
-import { dedent, findRegion, rawPathToToken } from './utils';
+import { dedent, findRegion, rawPathToToken, resolvePath } from './utils';
 
 const CH = '<'.charCodeAt(0);
 
@@ -11,10 +11,11 @@ type IDumiUserConfig = ReturnType<typeof defineConfig>;
 export interface IProps {
   codeBlockMode?: Required<IDumiUserConfig>['resolve']['codeBlockMode'];
   cwd?: string;
+  alias?: Record<string, string>;
 }
 
 function remarkPlugin(opt: IProps) {
-  const { codeBlockMode = 'active', cwd = process.cwd() } = opt;
+  const { codeBlockMode = 'active', cwd = process.cwd(), alias = {} } = opt;
 
   return (tree: any, vFile: any) => {
     const codeSnippets: [Node, number, Parent | undefined][] = [];
@@ -50,9 +51,12 @@ function remarkPlugin(opt: IProps) {
 
     for (const [node, index, parent] of codeSnippets) {
       const cloneNode: any = { ...node };
-      const rawPath = cloneNode.children[0].value.slice(3).trim();
-      // todo: alias
-      // .replace(/^@/, srcDir)
+      let rawPath = cloneNode.children[0].value.slice(3).trim();
+
+      // resolve alias
+      if (Object.values(alias).length > 0) {
+        rawPath = resolvePath(alias, rawPath);
+      }
 
       const { filepath, extension, region, lines } = rawPathToToken(rawPath);
       const regionName = region.slice(1);

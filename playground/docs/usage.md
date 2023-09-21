@@ -49,3 +49,7 @@ title: Documents
 **Output**
 
 <<< ./snippets/usage.region.ts#snippet
+
+### Alias
+
+<<< @/docs/snippets/alias.txt

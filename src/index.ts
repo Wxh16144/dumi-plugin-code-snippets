@@ -15,6 +15,7 @@ export default (api: IApi) => {
           {
             codeBlockMode: memo.resolve?.codeBlockMode,
             cwd: api.cwd,
+            alias: memo.alias,
           } as Required<RemarkPluginProps>,
         ],
         ...(Array.isArray(cloneExtraRemarkPlugins)
