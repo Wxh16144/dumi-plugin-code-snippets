@@ -80,3 +80,12 @@ export function findRegion(lines: Array<string>, regionName: string) {
 
   return null;
 }
+
+export function resolvePath(aliasMap: Record<string, string>, inputPath: string) {
+  for (const alias in aliasMap) {
+    if (inputPath.startsWith(alias)) {
+      return inputPath.replace(alias, aliasMap[alias]);
+    }
+  }
+  return inputPath;
+}
