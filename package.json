@@ -64,6 +64,7 @@
     ]
   },
   "dependencies": {
+    "enhanced-resolve": "^5.15.0",
     "fs-extra": "^11.1.1"
   },
   "devDependencies": {
@@ -80,7 +81,6 @@
     "commitlint": "^17",
     "concurrently": "^7",
     "cross-env": "^7",
-    "enhanced-resolve": "^5.15.0",
     "eslint": "^8",
     "fast-glob": "^3.3.1",
     "father": "^4",
