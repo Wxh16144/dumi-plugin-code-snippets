@@ -1,4 +1,5 @@
 import { defineConfig, unistUtilVisit } from 'dumi';
+import enhancedResolve from 'enhanced-resolve';
 import fs from 'fs-extra';
 import path from 'path';
 import type { Node, Parent } from 'unist';
@@ -11,10 +12,11 @@ type IDumiUserConfig = ReturnType<typeof defineConfig>;
 export interface IProps {
   codeBlockMode?: Required<IDumiUserConfig>['resolve']['codeBlockMode'];
   cwd?: string;
+  alias?: Record<string, string>;
 }
 
 function remarkPlugin(opt: IProps) {
-  const { codeBlockMode = 'active', cwd = process.cwd() } = opt;
+  const { codeBlockMode = 'active', cwd = process.cwd(), alias = {} } = opt;
 
   return (tree: any, vFile: any) => {
     const codeSnippets: [Node, number, Parent | undefined][] = [];
@@ -50,9 +52,7 @@ function remarkPlugin(opt: IProps) {
 
     for (const [node, index, parent] of codeSnippets) {
       const cloneNode: any = { ...node };
-      const rawPath = cloneNode.children[0].value.slice(3).trim();
-      // todo: alias
-      // .replace(/^@/, srcDir)
+      let rawPath = cloneNode.children[0].value.slice(3).trim();
 
       const { filepath, extension, region, lines } = rawPathToToken(rawPath);
       const regionName = region.slice(1);
@@ -66,9 +66,20 @@ function remarkPlugin(opt: IProps) {
         return path.join(cwd, __fm_path || '');
       })();
 
-      const src = path.isAbsolute(filepath)
+      let src: string = path.isAbsolute(filepath)
         ? filepath
         : path.join(path.dirname(currentFileAbsPath), filepath);
+
+      try {
+        const result = enhancedResolve.create.sync({
+          alias,
+          extensions: [extension].filter(Boolean) as string[],
+        })(path.dirname(currentFileAbsPath), filepath) as string;
+
+        if (result) src = result;
+      } catch (error) {
+        /* ignore */
+      }
 
       let content: string = '';
 

@@ -128,4 +128,10 @@ console.log('Hello dumi-plugin-code-snippets!');
         "
       `);
   });
+
+  it('支持别名', () => {
+    expect(
+      remark().use(core, {}).processSync(generateFile(`<<< @/../My.tsx`)).toString(),
+    ).toMatchSnapshot();
+  });
 });

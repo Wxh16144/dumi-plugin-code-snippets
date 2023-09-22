@@ -1,4 +1,4 @@
-import { dedent, rawPathToToken } from '../src/core/utils';
+import { dedent, rawPathToToken, resolvePath } from '../src/core/utils';
 
 /* prettier-ignore */
 const rawPathTokenMap: [string, Partial<{ filepath: string, extension: string, title: string, region: string, lines: string, lang: string }>][] = [
@@ -92,6 +92,43 @@ describe('core/utils', () => {
     rawPathTokenMap.forEach(([rawPath, expected]) => {
       it(`when ${rawPath} is passed`, () => {
         expect(rawPathToToken(rawPath)).toMatchObject(expected);
+      });
+    });
+  });
+
+  describe('resolvePath', () => {
+    const aliasMap = {
+      'alias1/path/to': '/path/to/alias1',
+      'alias2/some/subfolder': '/path/to/alias2',
+      '@': '/path/to/alias1/path/to/alias2',
+    };
+
+    const testCases = [
+      {
+        input: 'alias1/path/to/utils/file.js',
+        expected: '/path/to/alias1/utils/file.js',
+      },
+      {
+        input: 'alias2/some/subfolder/style.css',
+        expected: '/path/to/alias2/style.css',
+      },
+      {
+        input: '@/style.css',
+        expected: '/path/to/alias1/path/to/alias2/style.css',
+      },
+      {
+        input: 'no/alias/here/file.txt',
+        expected: 'no/alias/here/file.txt', // 无匹配别名
+      },
+      {
+        input: 'alias1/path/to/alias2/file.js',
+        expected: '/path/to/alias1/alias2/file.js', // 嵌套别名
+      },
+    ];
+
+    testCases.forEach(({ input, expected }) => {
+      it(`when ${input} is passed`, () => {
+        expect(resolvePath(aliasMap, input)).toEqual(expected);
       });
     });
   });
