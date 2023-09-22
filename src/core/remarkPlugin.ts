@@ -66,10 +66,20 @@ function remarkPlugin(opt: IProps) {
         return path.join(cwd, __fm_path || '');
       })();
 
-      const src = enhancedResolve.create.sync({
-        alias,
-        extensions: [extension].filter(Boolean) as string[],
-      })(path.dirname(currentFileAbsPath), filepath) as string;
+      let src: string = path.isAbsolute(filepath)
+        ? filepath
+        : path.join(path.dirname(currentFileAbsPath), filepath);
+
+      try {
+        const result = enhancedResolve.create.sync({
+          alias,
+          extensions: [extension].filter(Boolean) as string[],
+        })(path.dirname(currentFileAbsPath), filepath) as string;
+
+        if (result) src = result;
+      } catch (error) {
+        /* ignore */
+      }
 
       let content: string = '';
 
