@@ -1,6 +1,6 @@
 # dumi-plugin-code-snippets
 
-> 从现有代码中导入片段
+> 从现有文件中导入代码片段
 
 ## Usage
 
@@ -16,7 +16,12 @@ npm install dumi-plugin-code-snippets --save-dev
 // .dumirc.ts
 export default {
   plugins: [
-    ['dumi-plugin-code-snippets', {/* options */}]
+    [
+      'dumi-plugin-code-snippets',
+      {
+        /* options */
+      },
+    ],
   ],
 };
 ```

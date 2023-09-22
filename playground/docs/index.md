@@ -4,9 +4,9 @@ title: dumi-plugin-code-snippets
 
 <br>
 
-## 从现有代码中导入片段
+## 从现有文件中导入代码片段
 
-> 该功能完全借鉴的 [VitePress - mport Code Snippets](https://vitepress.dev/guide/markdown#import-code-snippets)，理论上写法完全一致。
+> 该功能完全借鉴的 [VitePress - Import Code Snippets](https://vitepress.dev/guide/markdown#import-code-snippets)，理论上写法完全一致。
 
 <br>
 
