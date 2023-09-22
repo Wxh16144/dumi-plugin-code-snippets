@@ -1,5 +1,5 @@
 ---
-title: Documents
+title: Docs
 ---
 
 ## 基础用法
@@ -30,7 +30,7 @@ title: Documents
 
 <<< ./snippets/install.bash{2}
 
-### 从代码块中导入
+## 从代码块中导入
 
 你也可以使用 [VS Code region](https://code.visualstudio.com/docs/editor/codebasics#_folding) 来只包括代码文件的相应部分。然后就可以在文件路径后面的 `#`` 后面提供自定义区域名称
 

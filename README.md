@@ -12,19 +12,16 @@ npm install dumi-plugin-code-snippets --save-dev
 
 ### Apply
 
+<!-- #region enable -->
+
 ```ts
 // .dumirc.ts
 export default {
-  plugins: [
-    [
-      'dumi-plugin-code-snippets',
-      {
-        /* options */
-      },
-    ],
-  ],
+  plugins: ['dumi-plugin-code-snippets'],
 };
 ```
+
+<!-- #endregion enable -->
 
 ### Exampled
 

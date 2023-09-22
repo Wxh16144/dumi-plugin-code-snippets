@@ -28,4 +28,4 @@ title: dumi-plugin-code-snippets
 
 ### Enable
 
-<<< ../.dumirc.ts#enable
+<<< @/../README.md#enable

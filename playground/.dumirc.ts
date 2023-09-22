@@ -8,10 +8,8 @@ const isProdSite = process.env.PREVIEW !== '1' && isProd;
 
 const githubRepoName = 'dumi-plugin-code-snippets';
 
-// #region enable
 export default defineConfig({
   plugins: ['dumi-plugin-code-snippets'],
-  // #endregion enable
 
   themeConfig: {
     name: 'code-snippets',
