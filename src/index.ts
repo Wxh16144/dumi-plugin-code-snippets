@@ -3,6 +3,11 @@ import type { RemarkPluginProps } from './core';
 import { remarkPlugin } from './core';
 
 export default (api: IApi) => {
+  api.describe({
+    key: 'dumi-third-party:code-snippets',
+    enableBy: api.EnableBy.register,
+  });
+
   api.register({
     key: 'modifyConfig',
     stage: Infinity,
