@@ -1,15 +1,13 @@
 import { defineConfig } from 'dumi';
 import { resolve } from 'path';
-import { homepage } from '../package.json';
+import { homepage, name } from '../package.json';
 
 const isProd = process.env.NODE_ENV === 'production';
 // 不是预览模式 同时是生产环境
 const isProdSite = process.env.PREVIEW !== '1' && isProd;
 
-const githubRepoName = 'dumi-plugin-code-snippets';
-
 export default defineConfig({
-  plugins: ['dumi-plugin-code-snippets'],
+  plugins: [name],
 
   themeConfig: {
     name: 'code-snippets',
@@ -18,6 +16,6 @@ export default defineConfig({
     },
   },
   outputPath: resolve(__dirname, '../.doc'),
-  base: isProdSite ? `/${githubRepoName}/` : '/',
-  publicPath: isProdSite ? `/${githubRepoName}/` : '/',
+  base: isProdSite ? `/${name}/` : '/',
+  publicPath: isProdSite ? `/${name}/` : '/',
 });
